@@ -1,0 +1,62 @@
+## Syntax highlighting for Stata do/ado/mata files
+## Drop in ~/.nano/ and add `include "~/.nano/stata.nanorc"` to ~/.nanorc
+##
+## Colors used (nano 2.9+ supports standard 8):
+##   brightblue   - keywords / control flow
+##   brightgreen  - built-in estimation/data commands
+##   brightcyan   - user-written / popular community commands
+##   yellow       - functions, macros
+##   magenta      - operators, numbers
+##   brightred    - strings
+##   green        - comments
+##   brightyellow - locals/globals
+
+syntax "stata" "\.do$" "\.ado$" "\.mata$"
+## Only works in nano 2.9+
+comment "*"
+
+## Numbers 
+color magenta "\<[0-9]+(\.[0-9]+)?([eE][+-]?[0-9]+)?\>"
+
+## Operators
+color magenta "[-+*/=<>!&|~^]" "[(){}\[\]]"
+
+## Control flow / program structure
+color brightblue "\<(if|else|in|while|forvalues|forval|foreach|continue|break|exit|return|program|end|version|syntax|args|local|global|tempvar|tempname|tempfile|macro|scalar|matrix|mat|capture|cap|quietly|qui|noisily|noi|display|di|assert|confirm|error|pause|set|which|sysdir|adopath|discard|clear|cls|mata|java|python|do|run|log|cd|mkdir|rmdir|pwd|tokenize|marksample|markout|shell)\>"
+
+## Data management
+color brightgreen "\<(use|webuse|sysuse|save|saveold|append|merge|joinby|cross|reshape|collapse|contract|expand|stack|fillin|xpose|sort|gsort|order|aorder|rename|ren|drop|keep|duplicates|isid|egen|generate|gen|g|replace|recode|destring|tostring|encode|decode|label|lab|format|compress|describe|desc|d|codebook|inspect|list|l|browse|br|edit|count|summarize|summ|sum|su|tabulate|tab|tabstat|table|tab1|tab2|tabi|tabout|by|bysort|bys|preserve|restore|snapshot|frame|frames|cwf|fframe|frlink|frget|import|export|infile|infix|insheet|outsheet|outfile|odbc|putexcel|putdocx|putpdf|xtile|pctile|_pctile|levelsof|svmat|matlist|orthpoly|file)\>"
+
+## Estimation commands (built-in)
+color brightgreen "\<(regress|reg|anova|areg|boxcox|cnsreg|eivreg|frontier|hetregress|intreg|ivregress|manova|mvreg|newey|nl|nlsur|qreg|iqreg|sqreg|bsqreg|reg3|rreg|sem|gsem|sureg|tobit|truncreg|xtreg|xtivreg|xtabond|xtdpd|xtdpdsys|xtfrontier|xthtaylor|xtmixed|mixed|xtpcse|xtrc|xtgls|xttobit|xtintreg|xtlogit|xtprobit|xtpoisson|xtnbreg|asclogit|asmixlogit|asmprobit|asroprobit|biprobit|clogit|cloglog|cusum|exlogistic|expoisson|fracreg|glm|gmm|hetprobit|ivprobit|ivtobit|logistic|logit|mlogit|nbreg|nlogit|ologit|oprobit|poisson|probit|rologit|scobit|slogit|zinb|zip|ztnb|ztp|ztnb|heckman|heckoprobit|heckpoisson|heckprobit|ml|mle|mi|impute|mestimate|melogit|meprobit|meglm|mecloglog|menbreg|meologit|meoprobit|mepoisson|meqrlogit|meqrpoisson|stcox|streg|stcrreg|sts|stset|stsum|stdescribe|stci|stir|stmc|stmh|strate|sttocc|sttoct|arch|arima|arfima|dfactor|mgarch|sspace|ucm|var|svar|vec|vecrank|irf|fcast|corrgram|wntestb|wntestq|xcorr|estat|estimates|est|predict|predictnl|margins|marginsplot|contrast|pwcompare|test|testnl|lincom|nlcom|hausman|suest|lrtest|forecast)\>"
+
+## Tests / post-estimation / plotting (built-in)
+color brightgreen "\<(ttest|ttesti|ztest|ztesti|prtest|prtesti|sdtest|sdtesti|signrank|signtest|ranksum|median|kwallis|spearman|ktau|pwcorr|correlate|corr|pca|factor|rotate|cluster|discrim|ca|mca|mds|canon|kappa|icc|alpha|twoway|graph|gr|histogram|hist|kdensity|scatter|line|bar|dot|pie|box|qqplot|pnorm|qnorm|rvfplot|avplot|cprplot|lvr2plot|acprplot|rocfit|roctab|diagt|lroc|lsens|estat|marginsplot|coefplot|lfit|lfitci|qfit|qfitci|lpoly|lpolyci|rcap|rarea|rspike|rbar|connected|tsline|tsrline|fpfit|fpfitci|mband|mspline)\>"
+
+## User-written commands
+color brightcyan "\<(reghdfe|ivreghdfe|ivreg2|xtivreg2|ppml|ppmlhdfe|poi2hdfe|logitfe|probitfe|gtools|ftools|gegen|gcollapse|gcontract|gduplicates|gquantiles|greshape|gsort|gstats|gtoplevelsof|gunique|gisid|esttab|estout|estadd|eststo|estpost|estwrite|coefplot|binscatter|binscatter2|binsreg|binscatterhist|grstyle|colorpalette|palettes|schemepack|rdrobust|rdbwselect|rdplot|rdpower|rdmulti|rddensity|rdlocrand|rdhonest|did_multiplegt|csdid|eventdd|did_imputation|sdid|synth|synth_runner|allsynth|xsynth|drdid|drimpute|teffects|psmatch2|nnmatch|cem|kmatch|ebalance|reghdfejl|didimputation|didregress|xthdidregress|xtevent|ddtiming|bacondecomp|honestdid|e2frame|ereturn|fre|fsum|mdesc|missings|univar|distinct|unique|winsor|winsor2|ereplace|outreg2|asdoc|tabout|dataex|sumhdfe|moremata|mmerge|mmcompare|kountry|geonear|geodist|spmap|maptile|shp2dta|mif2dta|statastates|statapi|usedata|parmest|parmhet|parmby|usespss|usesas|dyndoc|markdoc|texdoc|texsave|texsave2|filefilter|fs|fastcd|filelist|nrow|ncol|numlabel|labutil|labutil2|labvalch|labvalcb|labvalch2|elabel|sencode|groups|findit|ssc|adoupdate|net|search|help|vcemway|avar|ivreg2h|ranktest|overid|weakivtest|xtoverid|xtabond2|xtabond|xtdpdml|xtbalance|xtserial|xtqreg|qregpd|xtqreg|bootstrap|jackknife|permute|simulate|rsource|rcall|python|julia)\>"
+
+## Functions
+color yellow "\<(abs|acos|acosh|asin|asinh|atan|atan2|atanh|ceil|cloglog|comb|cos|cosh|digamma|exp|expm1|floor|int|invcloglog|invlogit|ln|ln1m|ln1p|lncomb|lnfact|lngamma|lnrgamma|log|log10|log1m|log1p|logit|max|min|mod|reldif|round|sign|sin|sinh|sqrt|sum|tan|tanh|trigamma|trunc|missing|inlist|inrange|cond|real|string|strpos|strlen|substr|subinstr|subinword|strtrim|strltrim|strrtrim|strupper|strlower|strreverse|strtoname|strofreal|word|wordcount|regexm|regexr|regexs|ustrregexm|ustrregexra|ustrregexrf|ustrregexs|char|uchar|usubstr|ustrlen|ustrupper|ustrlower|ustrtitle|date|daily|weekly|monthly|quarterly|halfyearly|yearly|mdy|dmy|ymd|ym|yq|yh|yw|yd|dow|doy|day|week|month|quarter|halfyear|year|hours|minutes|seconds|tc|tC|td|tw|tm|tq|th|ty|clock|Clock|dofc|dofC|cofd|dofm|mofd|dofq|qofd|dofw|wofd|dofh|hofd|dofy|yofd|now|normal|normalden|invnormal|binomial|chi2|chi2tail|invchi2|invchi2tail|F|Ftail|invF|invFtail|gammap|invgammap|ibeta|invibeta|nbinomial|poisson|tden|ttail|invttail|rbeta|rbinomial|rchi2|rexponential|rgamma|rhypergeometric|rnbinomial|rnormal|rpoisson|rt|runiform|runiformint|rweibull|uniform|r|e|c|_n|_N|_pi|_rc|_b|_se|st_view|st_sview|st_data|st_store|st_addvar|st_numscalar|st_matrix|st_rclear|st_nvar|st_nobs|st_local|st_global|st_varindex|st_isstrvar|st_vartype|st_varlabel|J|range|rows|cols|rowmax|rowmin|rowsum|rownonmissing|rowmissing|colmax|colmin|colsum|colnonmissing|quadcrossdev|quadcross|invsym|nonmissing|displayflush|_stata|_error|printf|select|uniqrows|cross|crossdev|invorder|tokens|tokeninit)\>"
+
+## Locals and globals
+color brightyellow "`[^']*'"
+color brightyellow "\$\{?[A-Za-z_][A-Za-z0-9_]*\}?"
+color brightyellow "``[^']*''"
+
+## Strings
+color brightred ""(\\.|[^"])*""
+color brightred "`"(\\.|[^"])*"'"
+
+## Comments 
+## Single-line: // to end of line, and *  at start of line
+color green "//[^\n]*"
+color green "^[[:space:]]*\*.*$"
+## Inline /// line continuation comment
+color green "///.*$"
+## Block comments /* ... */
+color green start="/\*" end="\*/"
+
+## Macro references
+color brightyellow "\<(r|e|s|c)\([A-Za-z_][A-Za-z0-9_]*\)"
+
