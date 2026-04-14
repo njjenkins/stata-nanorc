@@ -2,7 +2,7 @@
 
 Syntax highlighting for Stata (`.do`, `.ado`, `.mata`) files in [GNU nano](https://www.nano-editor.org/).
 
-As far as I can tell, no nanorc file for Stata existed publicly before this one, so I'm sharing mine for Public use.
+As far as I can tell, no nanorc file for Stata existed publicly before this one, so I'm sharing mine for public use.
 
 ## What it highlights
 
