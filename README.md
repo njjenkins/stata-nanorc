@@ -1,18 +1,19 @@
 # nanorc for Stata
 
-Syntax highlighting for Stata (`.do`, `.ado`, `.mata`) files in [GNU nano](https://www.nano-editor.org/).
+Syntax highlighting for Stata (`.do`, `.ado`, `.mata`, `.sthlp`) files in [GNU nano](https://www.nano-editor.org/).
 
 As far as I can tell, no nanorc file for Stata existed publicly before this one, so I'm sharing mine for public use.
 
 ## What it highlights
 
-- **Control flow and program structure**: `if`, `else`, `forvalues`, `foreach`, `while`, `program`, `syntax`, `args`, `capture`, `quietly`, `mata`, etc.
-- **Built-in commands**: data management (`use`, `merge`, `reshape`, `egen`, `gen`, ...), estimation (`regress`, `xtreg`, `ivregress`, `logit`, `probit`, `poisson`, `stcox`, `arima`, ...), postestimation (`margins`, `test`, `lincom`, `predict`, ...), and tests/plots (`ttest`, `correlate`, `twoway`, ...).
-- **Popular user-written commands**: `reghdfe`, `ivreghdfe`, `ivreg2`, `ppmlhdfe`, the `gtools`/`ftools` family, `esttab`/`estout`/`eststo`, `coefplot`, `binscatter`/`binsreg`, the `rdrobust` family, DID tools (`csdid`, `did_multiplegt`, `eventdd`, `honestdid`, `bacondecomp`, `sdid`), matching (`psmatch2`, `teffects`, `kmatch`, `ebalance`), and reporting (`outreg2`, `asdoc`, `dataex`, `texsave`).
+- **Control flow and program structure**: `if`, `else`, `forvalues`, `foreach`, `while`, `program`, `syntax`, `args`, `capture`, `quietly`, `mata`, `include`, `timer`, etc.
+- **Built-in commands**: data management (`use`, `merge`, `reshape`, `egen`, `gen`, `tsset`, `xtset`, `tsfill`, `svyset`, `postfile`/`post`/`postclose`, `recast`, `clonevar`, ...), estimation (`regress`, `xtreg`, `ivregress`, `logit`, `probit`, `poisson`, `stcox`, `arima`, ...), postestimation (`margins`, `test`, `lincom`, `predict`, ...), and tests/plots (`ttest`, `correlate`, `twoway`, ...).
+- **Popular user-written commands**: `reghdfe`, `ivreghdfe`, `ivreg2`, `ppmlhdfe`, the `gtools`/`ftools` family, `esttab`/`estout`/`eststo`, `coefplot`, `binscatter`/`binsreg`, the `rdrobust` family, DID tools (`csdid`, `did2s`, `staggered`, `did_multiplegt`, `eventdd`, `honestdid`, `bacondecomp`, `sdid`), matching (`psmatch2`, `teffects`, `kmatch`, `ebalance`), reporting (`outreg2`, `asdoc`, `dataex`, `texsave`), and utilities (`project`, `confirmdir`, `filelist`, `ereplace`, `winsor2`, `distinct`, `unique`).
 - **Abbreviations**: common short forms alongside full names (`reg`, `gen`, `sum`, `su`, `tab`, `qui`, `cap`, `noi`, `di`, `bys`, ...).
-- **Functions**: math, string, date/time, and random-number generators.
-- **Locals and globals**: backtick-apostrophe locals (`` `x' ``), `$global`, `${global}`, and returned results (`r()`, `e()`, `s()`, `c()`).
-- **Strings, numbers, operators.**
+- **Functions**: math, string (including Unicode/`ustr*`), date/time, random-number generators, and Mata built-ins (`st_view`, `st_data`, `J`, `rows`, `cols`, `invsym`, `asarray`, ...).
+- **Locals and globals**: backtick-apostrophe locals (`` `x' ``), `$global`, `${global}`, compound double-quoted strings (`` `"..."' ``), and returned results (`r()`, `e()`, `s()`, `c()`).
+- **Strings**: both straight `"..."` and compound `` `"..."' `` forms.
+- **Numbers, operators.**
 - **Comments**: `*` (line-leading), `//`, `///`, and `/* ... */` blocks.
 
 ## Installation
