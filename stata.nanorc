@@ -55,7 +55,7 @@ color brightyellow "\<(r|e|s|c)\([A-Za-z_][A-Za-z0-9_]*\)"
 
 ## Comments (last so they override everything above)
 ## Single-line: // and * at line start
-color green "//[^\n]*"
+color green "//.*$"
 color green "^[[:space:]]*\*.*$"
 ## Line-continuation comment
 color green "///.*$"
