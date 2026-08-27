@@ -14,7 +14,8 @@ As far as I can tell, no nanorc file for Stata existed publicly before this one,
 - **Locals and globals**: backtick-apostrophe locals (`` `x' ``), `$global`, `${global}`, compound double-quoted strings (`` `"..."' ``), and returned results (`r()`, `e()`, `s()`, `c()`).
 - **Strings**: both straight `"..."` and compound `` `"..."' `` forms.
 - **Numbers, operators.**
-- **Comments**: `*` (line-leading), `//`, `///`, and `/* ... */` blocks.
+- **Comments**: `*` (line-leading), `//`, and `/* ... */` blocks. `///` line continuations get their own brighter color so a wrapped command reads as one unit.
+- **`#delimit`**: flagged in `brightred`, since it silently changes how every following line parses.
 
 ## Installation
 
@@ -105,7 +106,7 @@ sed -i '/^comment /d' ~/.nano/stata.nanorc
 
 ### nano 2.3.x and earlier
 
-If POSIX character classes like `[[:space:]]` cause errors, replace them with literal character classes (a space and a tab inside brackets). Only one line in the file uses this (the line-leading `*` comment rule).
+If POSIX character classes like `[[:space:]]` or `[[:blank:]]` cause errors, replace them with literal character classes (a space and a tab inside brackets). Four lines use them: the `#delimit` rule and the three single-line comment rules.
 
 Check your version with:
 
@@ -117,7 +118,7 @@ nano --version
 
 ### Colors
 
-The file uses the standard 8 nano colors: `brightblue` for control flow, `brightgreen` for built-in commands, `brightcyan` for user-written commands, `yellow` for functions, `brightyellow` for macros, `brightred` for strings, `green` for comments, and `magenta` for numbers and operators. Edit any `color <name>` line to change them.
+The file uses the standard 8 nano colors: `brightblue` for control flow, `brightgreen` for built-in commands, `brightcyan` for user-written commands, `yellow` for functions, `brightyellow` for macros, `brightred` for strings and `#delimit`, `green` for comments, and `magenta` for numbers and operators. Edit any `color <name>` line to change them.
 
 ### Adding commands
 
@@ -132,7 +133,8 @@ Pull requests welcome, especially for commonly-used community commands I missed.
 ## Known limitations
 
 - **Mid-line `*` comments**: Stata treats `*` as a comment character at the start of a line, but `*` is also multiplication. Nano's line-based regex can't reliably tell these apart, so only line-leading `*` comments are highlighted. Mid-line uses of `*` are treated as operators. This matches how most other editors handle Stata.
-- **Nested block comments**: `/* ... */` regions spanning many lines work, but certain edge cases may confuse the highlighter.
+- **Nested block comments**: `/* ... */` regions spanning many lines work, but certain edge cases may confuse the highlighter. A literal `/*` inside a string or URL will start a block-comment region.
+- **`//` inside strings**: the `//` rule requires a preceding space or start of line, which keeps URLs (`https://...`) and UNC paths (`//server/share`) uncolored. But a genuine `//` inside a double-quoted string — `di "a // b"` — is still treated as a comment, since nano's line-based regexes have no notion of string state.
 - **Nested locals**: `` `x' `` highlights correctly; `` ``x'' `` highlights only to one level.
 - **Abbreviation coverage is not exhaustive**: Stata allows abbreviations down to a minimum length for most commands (e.g., `regress` can be `reg`, `regr`, `regre`, `regres`, or `regress`). This file highlights the full form and the most common short forms only (for now).
 - **Command list is not complete**: Stata has hundreds of commands and there are thousands of user-written packages on SSC. If something you use isn't highlighted, add it (see above) or open an issue.

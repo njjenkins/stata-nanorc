@@ -1,4 +1,4 @@
-## Syntax highlighting for Stata do/ado/mata/sthlp files
+## Syntax highlighting for Stata do/ado/mata files
 ## Drop in ~/.nano/ and add `include "~/.nano/stata.nanorc"` to ~/.nanorc
 ##
 ## Colors used (nano 2.9+ supports standard 8):
@@ -7,8 +7,9 @@
 ##   brightcyan   - user-written / popular community commands
 ##   yellow       - functions
 ##   magenta      - operators, numbers
-##   brightred    - strings
+##   brightred    - strings, #delimit
 ##   green        - comments
+##   brightgreen  - (also) /// line continuations
 ##   brightyellow - locals/globals/macro refs
 
 syntax "stata" "\.do$" "\.ado$" "\.mata$"
@@ -24,6 +25,9 @@ color magenta "[-+*/=<>!&|~^]" "[(){}\[\]]"
 ## Control flow / program structure
 color brightblue "\<(if|else|in|while|forvalues|forval|foreach|continue|break|exit|return|program|end|version|syntax|args|local|global|tempvar|tempname|tempfile|macro|scalar|matrix|mat|capture|cap|quietly|qui|noisily|noi|display|di|assert|confirm|error|pause|set|which|sysdir|adopath|discard|clear|cls|mata|java|python|do|run|include|log|cd|mkdir|rmdir|pwd|tokenize|marksample|markout|shell|timer)\>"
 
+## #delimit directive (changes how every following line parses -- make it loud)
+color brightred "^[[:space:]]*#delimit([[:space:]]+(cr|;))?"
+
 ## Data management
 color brightgreen "\<(use|webuse|sysuse|save|saveold|append|merge|joinby|cross|reshape|collapse|contract|expand|stack|fillin|xpose|sort|gsort|order|aorder|rename|ren|drop|keep|duplicates|isid|egen|generate|gen|g|replace|recode|destring|tostring|encode|decode|label|lab|format|compress|describe|desc|d|codebook|inspect|list|l|browse|br|edit|count|summarize|summ|sum|su|tabulate|tab|tabstat|table|tab1|tab2|tabi|by|bysort|bys|preserve|restore|snapshot|frame|frames|cwf|fframe|frlink|frget|import|export|infile|infix|insheet|outsheet|outfile|odbc|putexcel|putdocx|putpdf|xtile|pctile|_pctile|levelsof|svmat|matlist|orthpoly|file|tsset|xtset|tsfill|svyset|xtdes|xtsum|xttrans|tsappend|tsreport|tssmooth|postfile|post|postclose|recast|clonevar)\>"
 
@@ -37,7 +41,9 @@ color brightgreen "\<(ttest|ttesti|ztest|ztesti|prtest|prtesti|sdtest|sdtesti|si
 color brightcyan "\<(reghdfe|ivreghdfe|ivreg2|xtivreg2|ppml|ppmlhdfe|poi2hdfe|logitfe|probitfe|gtools|ftools|gegen|gcollapse|gcontract|gduplicates|gquantiles|greshape|gstats|gtoplevelsof|gunique|gisid|esttab|estout|estadd|eststo|estpost|estwrite|coefplot|binscatter|binscatter2|binsreg|binscatterhist|grstyle|colorpalette|palettes|schemepack|rdrobust|rdbwselect|rdplot|rdpower|rdmulti|rddensity|rdlocrand|rdhonest|did_multiplegt|csdid|eventdd|did_imputation|sdid|synth|synth_runner|allsynth|xsynth|drdid|drimpute|teffects|psmatch2|nnmatch|cem|kmatch|ebalance|reghdfejl|didimputation|didregress|xthdidregress|xtevent|ddtiming|bacondecomp|honestdid|did2s|staggered|flexpaneldid|pretrends|e2frame|ereturn|fre|fsum|mdesc|missings|univar|distinct|unique|winsor|winsor2|ereplace|outreg2|asdoc|tabout|dataex|sumhdfe|moremata|mmerge|mmcompare|kountry|geonear|geodist|spmap|maptile|shp2dta|mif2dta|statastates|statapi|usedata|parmest|parmhet|parmby|usespss|usesas|dyndoc|markdoc|texdoc|texsave|texsave2|filefilter|fs|fastcd|filelist|nrow|ncol|numlabel|labutil|labutil2|labvalch|labvalcb|labvalch2|elabel|sencode|groups|findit|ssc|adoupdate|net|search|help|vcemway|avar|ivreg2h|ranktest|overid|weakivtest|xtoverid|xtabond2|xtdpdml|xtbalance|xtserial|xtqreg|qregpd|bootstrap|jackknife|permute|simulate|rsource|rcall|project|confirmdir)\>"
 
 ## Functions (Stata + Mata)
-color yellow "\<(abs|acos|acosh|asin|asinh|atan|atan2|atanh|ceil|cloglog|comb|cos|cosh|digamma|exp|expm1|floor|int|invcloglog|invlogit|ln|ln1m|ln1p|lncomb|lnfact|lngamma|lnrgamma|log|log10|log1m|log1p|logit|max|min|mod|reldif|round|sign|sin|sinh|sqrt|tan|tanh|trigamma|trunc|missing|inlist|inrange|cond|real|string|strpos|strlen|substr|subinstr|subinword|strtrim|strltrim|strrtrim|strupper|strlower|strreverse|strtoname|strofreal|word|wordcount|regexm|regexr|regexs|ustrregexm|ustrregexra|ustrregexrf|ustrregexs|char|uchar|usubstr|ustrlen|ustrupper|ustrlower|ustrtitle|trim|itrim|upper|lower|proper|plural|strmatch|stritrim|udstrlen|udsubstr|ustrltrim|ustrrtrim|ustrtrim|ustrcompare|ustrfrom|ustrto|ustrinvalidcnt|date|daily|weekly|monthly|quarterly|halfyearly|yearly|mdy|dmy|ymd|ym|yq|yh|yw|yd|dow|doy|day|week|month|quarter|halfyear|year|hours|minutes|seconds|tc|tC|td|tw|tm|tq|th|ty|clock|Clock|dofc|dofC|cofd|dofm|mofd|dofq|qofd|dofw|wofd|dofh|hofd|dofy|yofd|now|normal|normalden|invnormal|binomial|chi2|chi2tail|invchi2|invchi2tail|F|Ftail|invF|invFtail|gammap|invgammap|ibeta|invibeta|nbinomial|poisson|tden|ttail|invttail|rbeta|rbinomial|rchi2|rexponential|rgamma|rhypergeometric|rnbinomial|rnormal|rpoisson|rt|runiform|runiformint|rweibull|uniform|r|e|c|_n|_N|_pi|_rc|_b|_se|_newline|_continue|_dup|_skip|st_view|st_sview|st_data|st_store|st_addvar|st_numscalar|st_matrix|st_rclear|st_nvar|st_nobs|st_local|st_global|st_varindex|st_isstrvar|st_vartype|st_varlabel|J|range|rows|cols|rowmax|rowmin|rowsum|rownonmissing|rowmissing|colmax|colmin|colsum|colnonmissing|quadcrossdev|quadcross|invsym|nonmissing|displayflush|_stata|_error|printf|select|uniqrows|crossdev|invorder|tokens|tokeninit|asarray|asarray_create|asarray_contains|asarray_keys|asarray_remove)\>"
+color yellow "\<(abs|acos|acosh|asin|asinh|atan|atan2|atanh|ceil|comb|cos|cosh|digamma|exp|expm1|floor|int|invcloglog|invlogit|ln|ln1m|ln1p|lncomb|lnfact|lngamma|lnrgamma|log10|log1m|log1p|max|min|mod|reldif|round|sign|sin|sinh|sqrt|tan|tanh|trigamma|trunc|missing|inlist|inrange|cond|real|string|strpos|strlen|substr|subinstr|subinword|strtrim|strltrim|strrtrim|strupper|strlower|strreverse|strtoname|strofreal|word|wordcount|regexm|regexr|regexs|ustrregexm|ustrregexra|ustrregexrf|ustrregexs|char|uchar|usubstr|ustrlen|ustrupper|ustrlower|ustrtitle|trim|itrim|upper|lower|proper|plural|strmatch|stritrim|udstrlen|udsubstr|ustrltrim|ustrrtrim|ustrtrim|ustrcompare|ustrfrom|ustrto|ustrinvalidcnt|date|daily|weekly|monthly|quarterly|halfyearly|yearly|mdy|dmy|ymd|ym|yq|yh|yw|yd|dow|doy|day|week|month|quarter|halfyear|year|hours|minutes|seconds|tc|tC|td|tw|tm|tq|th|ty|clock|Clock|dofc|dofC|cofd|dofm|mofd|dofq|qofd|dofw|wofd|dofh|hofd|dofy|yofd|now|normal|normalden|invnormal|binomial|chi2|chi2tail|invchi2|invchi2tail|F|Ftail|invF|invFtail|gammap|invgammap|ibeta|invibeta|nbinomial|tden|ttail|invttail|rbeta|rbinomial|rchi2|rexponential|rgamma|rhypergeometric|rnbinomial|rnormal|rpoisson|rt|runiform|runiformint|rweibull|uniform|r|e|c|_n|_N|_pi|_rc|_b|_se|_newline|_continue|_dup|_skip|st_view|st_sview|st_data|st_store|st_addvar|st_numscalar|st_matrix|st_rclear|st_nvar|st_nobs|st_local|st_global|st_varindex|st_isstrvar|st_vartype|st_varlabel|J|range|rows|cols|rowmax|rowmin|rowsum|rownonmissing|rowmissing|colmax|colmin|colsum|colnonmissing|quadcrossdev|quadcross|invsym|nonmissing|displayflush|_stata|_error|printf|select|uniqrows|crossdev|invorder|tokens|tokeninit|asarray|asarray_create|asarray_contains|asarray_keys|asarray_remove)\>"
+## Ambiguous names that are both commands and functions: only the call form is a function
+color yellow "\<(log|logit|cloglog|poisson)\("
 
 ## Locals and globals (must come before strings so string color wins for `"..."')
 color brightyellow "`[^']*'"
@@ -54,10 +60,12 @@ color brightred "`\"[^\"]*\"'"
 color brightyellow "\<(r|e|s|c)\([A-Za-z_][A-Za-z0-9_]*\)"
 
 ## Comments (last so they override everything above)
-## Single-line: // and * at line start
-color green "//.*$"
+## Single-line //: Stata requires whitespace or line start before it, so this
+## leaves URLs (https://...) and UNC paths (//server/share) alone.
+color green "(^|[[:blank:]])//.*$"
+## Line-continuation /// -- brighter than a plain comment so wrapped commands read as one unit
+color brightgreen "(^|[[:blank:]])///.*$"
+## Line-leading * comment
 color green "^[[:space:]]*\*.*$"
-## Line-continuation comment
-color green "///.*$"
 ## Block comments /* ... */
 color green start="/\*" end="\*/"
