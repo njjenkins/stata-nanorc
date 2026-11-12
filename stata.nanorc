@@ -68,4 +68,22 @@ color brightgreen "(^|[[:blank:]])///.*$"
 ## Line-leading * comment
 color green "^[[:space:]]*\*.*$"
 ## Block comments /* ... */
-color green start="/\*" end="\*/"
+## Stata ignores everything after //, so a /* there (e.g. `// hte/*_pl`) must
+## not open a block. nano regexes have no lookbehind, so the start pattern also
+## matches a whole // comment containing /*, consuming it to end of line; the
+## end alternative \`$ (empty remainder) then closes that region immediately.
+## Likewise a /* inside a string (e.g. "https://x/*") is not a comment: the
+## start pattern swallows the string up to (not including) its closing quote,
+## and the end alternative \`" closes the region right there. Requiring no
+## blank between the opening quote and /* keeps a closing quote from being
+## mistaken for an opening one (as in: "a" /* note "b" */).
+color green start="/\*|(^|[[:blank:]])//.*/\*.*|\"[^\"[:blank:]]*/\*[^\"]*" end="\*/|\`$|\`\""
+## A real /* at end of line leaves an empty remainder too, so the rule above
+## would close it at once; this rule carries those blocks across lines.
+color green start="(^|[[:blank:]])/\*$" end="\*/"
+## The string trick above paints such strings green; restore them to string
+## colour, then re-apply the line comments in case the string sat inside one.
+color brightred "\"[^\"[:blank:]]*/\*[^\"]*\""
+color green "(^|[[:blank:]])//.*$"
+color brightgreen "(^|[[:blank:]])///.*$"
+color green "^[[:space:]]*\*.*$"
